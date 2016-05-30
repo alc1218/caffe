@@ -1,0 +1,28 @@
+
+CREATE LMDB
+
+build/tools/convert_imageset -backend lmdb -resize_height 32 -resize_width 32 . shuffled_train_cifashionDB.txt cifashion
+
+COMPUTE TRAIN IMAGE MEAN
+
+build/tools/compute_image_mean -backend lmdb cifashion train_image_mean
+
+CONNECT TO REMOTE SERVER
+
+ssh -p 22345 arcadi@158.109.8.103
+
+SEND DATA TO REMOTE SERVER
+
+scp -P 22345 <filename> arcadi@158.109.8.103:.
+
+REQUEST DATA TO REMOTE SERVER
+
+scp -P 22345 arcadi@158.109.8.103:/home/arcadi/<filename> .
+
+ZIP FILE
+
+zip -r <filename> <directory>
+
+UNZIP FILE
+
+unzip <filename>
