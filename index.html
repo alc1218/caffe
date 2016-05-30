@@ -24,7 +24,13 @@
 
 <p>En les següents figures es poden observar 96 filtres obtinguts en la primera capa convolucional (conv1) de dos models entrenats en Alexnet. En les dues primeres figures es poden veure els filtres entrenats des de zero amb una xarxa neuronal, per altre banda, en l'última figura el nostre model ha estat entrenat utilitzant la tècnica del finetuning el qual permet utilitzar els pesos d'una xarxa previament entrenada i per tant amb els filtres ja definits.</p>
 
-<p>Els filtres de la figura 1 han estat pessims, és per això que els veiem borrosos i poc definits. Com podem observar en la figura 2, els resultats han estat millors ja que hem utilitzat una altre tècnica que ens ha permés convergir a una millor solució (En comptes de solver SGD hem utilitzat solver ADAM). Com podem observar tot i que els filtres segueixin borrosos estan més ben definits. Per últim, en la figura 3 es poden apreciar els filtres de Alexnet. Aquests han estat entrenats durant 350.000 iteracions sobre el dataset de ImageNet.</p>
+<p>Els filtres de la figura 1 han estat pessims, és per això que els veiem borrosos i poc definits. Com podem observar en la figura 2, els resultats han estat millors ja que hem utilitzat una altre tècnica que ens ha permés convergir a una millor solució (En comptes de solver ADAM hem utilitzat solver SGD). Com podem observar tot i que els filtres segueixin borrosos estan més ben definits. Per últim, en la figura 3 es poden apreciar els filtres de Alexnet. Aquests han estat entrenats durant 350.000 iteracions sobre el dataset de ImageNet.</p>
+
+<p><img src="https://github.com/alc1218/caffe/blob/master/divulgaci%C3%B3_img/filter/Filters_alexnet60_conv1_Adam_100000_0BN_0.9M.png" alt="Figura1_fromScratch_solver_ADAM"></p>
+
+<p><img src="https://github.com/alc1218/caffe/blob/master/divulgaci%C3%B3_img/filter/Filters_alexnet60_conv1_SGD_100000_0BN_0.9M.png" alt="Figura2_fromScratch_solver_SGD"></p>
+
+<p><img src="https://github.com/alc1218/caffe/blob/master/divulgaci%C3%B3_img/filter/Filters_alexnet60_ft_conv1_Adam_50000_0BN_0.9M.png" alt="Figura3_finetunning"></p>
 
 <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
