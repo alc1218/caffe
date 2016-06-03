@@ -1,3 +1,9 @@
+## Arcadi
+
+shuffled_train_cifashionDB.txt
+shuffled_test_cifashionDB.txt
+cifashion/*
+
 ## General
 
 # Compiled Object files
