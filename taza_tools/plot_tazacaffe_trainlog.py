@@ -11,8 +11,8 @@ if __name__=="__main__":
 
     lines = [x.strip() for x in open(sys.argv[1])]
 
-    iterations=[]
-    this_iter=[]
+    iterations = []
+    this_iter = []
     for l in lines:
         if 'Iteration' in l:
             iterations.append(this_iter)
@@ -23,7 +23,7 @@ if __name__=="__main__":
 
     iterations.pop(0) #remove initialization junk
 
-    iterdic ={}
+    iterdic = {}
     for x in iterations:
         k = re.findall('Iteration ([0-9]+),', x[0])[0]
         if k in iterdic:
@@ -36,17 +36,27 @@ if __name__=="__main__":
     names_testacc = set([])
     iterscores = {}
     for x in iterdic:
-        thisit_trainloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Train net output' in y and ': loss' in y])
-        thisit_testloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': loss' in y])
-        thisit_testacc = dict([strfloat(re.findall('(accuracy[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+)', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': accuracy' in y])
-        full_train_loss = dict([strfloat(re.findall('(loss) = ([0-9\.]+)', iterdic[x][0])[0])]) if 'loss' in iterdic[x][0] else None
+
+        #thisit_trainloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Train net output' in y and ': loss' in y])
+        #thisit_testloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': loss' in y])
+        #thisit_testacc = dict([strfloat(re.findall('(accuracy[@a-zA-Z0-9\/ _\-]+) = ([0-9\.e\-]+)', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': accuracy' in y])
+
+        thisit_trainloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]*) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Train net output' in y and ': loss' in y])
+        thisit_testloss = dict([strfloat(re.findall('(loss[@a-zA-Z0-9\/ _\-]*) = ([0-9\.e\-]+) ', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': loss' in y])
+        thisit_testacc = dict([strfloat(re.findall('(accuracy[@a-zA-Z0-9\/ _\-]*) = ([0-9\.e\-]+)', y)[0]) for y in iterdic[x] if 'Test net output' in y and ': accuracy' in y])
+
+        #full_train_loss = dict([strfloat(re.findall('(loss) = ([0-9\.]+)', iterdic[x][0])[0])]) if 'loss' in iterdic[x][0] else None
+
+        print "len(thisit_trainloss): " + str(len(thisit_trainloss))
+        print "x: " + str(iterdic[x])
+
         iterscores[int(x)] = {}
         if len(thisit_trainloss):
             iterscores[int(x)]['trainloss'] = thisit_trainloss
             names_trainloss = names_trainloss.union(thisit_trainloss.keys())
-        if full_train_loss != None:
-            iterscores[int(x)]['trainloss'].update(full_train_loss)
-            names_trainloss = names_trainloss.union(['loss'])
+        #if full_train_loss != None:
+        #    iterscores[int(x)]['trainloss'].update(full_train_loss)
+        #    names_trainloss = names_trainloss.union(['loss'])
         if len(thisit_testloss):
             iterscores[int(x)]['testloss'] = thisit_testloss
             names_testloss = names_testloss.union(thisit_testloss.keys())
