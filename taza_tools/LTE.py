@@ -12,6 +12,11 @@ strToSave_label = ''
 
 for (dirpath, dirnames, filenames) in walk(mypath):
 
+	try:
+		filenames.remove('.DS_Store')
+	except ValueError:
+		pass
+
 	for idx in range(len(filenames)):
 
 		" FUTUR VERSION: TAKE INTO ACCOUNT TO CHECK .DS_Store"
@@ -21,7 +26,7 @@ for (dirpath, dirnames, filenames) in walk(mypath):
 		strToSave+="/"
 		strToSave+=filenames[idx]
 
-		strToSave+="	"
+		strToSave+=" "
 
 		strToSave+=str(seq_id)
 
@@ -31,20 +36,20 @@ for (dirpath, dirnames, filenames) in walk(mypath):
 		seq_id+=1
 		strToSave_label+=dirpath[12:] # WE SKIPE THE FIRST CHARACTER '.'
 		strToSave_label+="\n"
-'''
+
 file = open('cifashionDB_labelAndClass.txt', 'w')
 file.write(strToSave)
 file.close()
-'''
+
 file = open('cifashionDB_label.txt', 'w')
 file.write(strToSave_label)
 file.close()
 
 
-'''
+
 "SHUFFLE AND SPLIT DATASET IN TRAIN (80) AND TEST (20)"
 
-lines = open('cifashionDB.txt', 'r').readlines()
+lines = open('cifashionDB_labelAndClass.txt', 'r').readlines()
 
 random.shuffle(lines)
 
@@ -65,5 +70,3 @@ for line in lines:
 		open('shuffled_test_cifashionDB.txt','a').writelines(line)
 
 	idx+=1
-
-'''
