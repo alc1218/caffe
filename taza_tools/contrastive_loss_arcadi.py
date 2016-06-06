@@ -13,6 +13,8 @@ from caffe.proto import caffe_pb2
 
 import numpy as np
 
+import cv2
+
 solver_config_path = 'bvlc_alexnet/solver.prototxt'
 
 '''
@@ -112,7 +114,7 @@ test_interval = niter / 10
 train_loss = zeros(niter)
 test_acc = zeros(int(np.ceil(niter / test_interval)))
 
-trData = [(a.split(' ')[0], a.split(' ')[1]) for a in open('/Users/arcadillanzacarmona/caffe_github/shuffled_train_cifashionDB.txt')]
+trData = [(".." + a.split(' ')[0], a.split(' ')[1]) for a in open('/Users/arcadillanzacarmona/caffe_github/shuffled_train_cifashionDB.txt')]
 batch_size = 64
 batch_idx = 0
 perm = np.random.permutation(len(trData))
@@ -126,6 +128,7 @@ for it in range(niter):
     y = np.zeros([batch_size, 1], np.float32)
     for i in xrange(batch_size):
         imFilename = trData[batch_idx*batch_size+i][0]
+        #import ipdb; ipdb.set_trace()
         label = trData[batch_idx*batch_size+i][1]
         y[i,0] = int(label)
         im = cv2.imread(imFilename, 1)
