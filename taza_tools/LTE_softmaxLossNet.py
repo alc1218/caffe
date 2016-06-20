@@ -1,5 +1,6 @@
 from os import walk
 import random
+import pickle
 
 "CREATION OF CIFASHION FILE FOR CAFFE"
 
@@ -10,7 +11,12 @@ seq_id = 0
 strToSave = ''
 strToSave_label = ''
 
+# Empty dict
+d = {}
+
 for (dirpath, dirnames, filenames) in walk(mypath):
+
+	filePaths = []
 
 	try:
 		filenames.remove('.DS_Store')
@@ -32,10 +38,16 @@ for (dirpath, dirnames, filenames) in walk(mypath):
 
 		strToSave+="\n"
 
+		filePaths.append(".." + str(dirpath[1:]) + "/" + str(filenames[idx]))
+
 	if len(filenames) > 0:
+		# Fill in the entries one by one
+		d[seq_id] = filePaths
 		seq_id+=1
 		strToSave_label+=dirpath[12:] # WE SKIPE THE FIRST CHARACTER '.'
 		strToSave_label+="\n"
+
+pickle.dump(d, open('dictionary.p', 'wb'))
 
 file = open('cifashionDB_labelAndClass.txt', 'w')
 file.write(strToSave)

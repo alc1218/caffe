@@ -2,6 +2,7 @@
 
 shuffled_train_cifashionDB.txt
 shuffled_test_cifashionDB.txt
+raw/*
 cifashion/*
 examples/*
 
@@ -102,3 +103,9 @@ CURRENT
 MANIFEST-*
 
 wide_eyes_tech/*
+
+cifashionDB_label.txt
+
+cifashionDB_labelAndClass.txt
+
+dictionary.p

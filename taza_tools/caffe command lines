@@ -15,7 +15,7 @@ SEND DATA TO REMOTE SERVER
 
 scp -P 22345 <filename> arcadi@158.109.8.103:.
 
-REQUEST DATA TO REMOTE SERVER
+REQUEST DATA FROM REMOTE SERVER
 
 scp -P 22345 arcadi@158.109.8.103:/home/arcadi/<filename> .
 
