@@ -5,6 +5,7 @@ shuffled_test_cifashionDB.txt
 raw/*
 cifashion/*
 examples/*
+src/caffe/layers/normalize_layer.*
 
 ## General
 
